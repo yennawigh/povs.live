@@ -1,57 +1,16 @@
 import { useSettings } from "@/contexts/settings-context";
+import { useHeaderState } from "@/hooks/useHeaderState";
 import { useModal } from "@/contexts/modal-context";
 import { ActionButtons } from "./actions";
 import { SearchBar } from "./search";
-import { useHeaderState } from "@/hooks/useHeaderState";
-import { apiService } from "@/services/apiService";
-import { useEffect, useState } from "react";
 
 export default function Header({ server, onSearch }) {
   const { query, handleSearch } = useHeaderState();
-  const [players, setPlayers] = useState(null);
   const { openModal } = useModal();
   const { lang } = useSettings();
 
-  useEffect(() => {
-    if (server?.CODE) {
-      fetch(`https://servers-frontend.fivem.net/api/servers/single/${server.CODE}`, {
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-      })
-        .then((response) => {
-          if (!response.ok) throw new Error("Network response was not ok");
-          return response.json();
-        })
-        .then((data) => {
-          if (data?.Data?.clients !== undefined) {
-            setPlayers({ clients: data.Data.clients });
-          } else {
-            setPlayers({ error: "Sunucu kapalı" });
-          }
-        })
-        .catch(() => setPlayers({ error: "Sunucu kapalı" }));
-    } else {
-      setPlayers({ error: "Oyuncu sayısı alınamadı" });
-    }
-  }, [server]);
-  console.log(players);
-
   return (
     <div className="w-full h-[65px] flex items-center justify-between border-b border-black/20 dark:border-white/15">
-      <div className="flex items-center space-x-2 h-full w-auto">
-        <img
-          className="h-full w-auto flex-shrink-0"
-          src={server.LOGO}
-        />
-        <div className="flex flex-col -space-y-0.5">
-          <h3 className="text-xl font-bold">{server.NAME.toUpperCase()}</h3>
-          <p className="text-xs opacity-70 dark:opacity-70">
-            {players?.error
-              ? "Sunucu kapalı"
-              : players?.clients + " oyuncu aktif"}
-          </p>
-        </div>
-      </div>
       <div className="flex items-center space-x-2 h-full p-2">
         <SearchBar
           lang={lang}
@@ -61,7 +20,7 @@ export default function Header({ server, onSearch }) {
             onSearch(e.target.value.toLowerCase());
           }}
         />
-        <ActionButtons openModal={openModal} />
+        <ActionButtons server={server} openModal={openModal} />
       </div>
     </div>
   );

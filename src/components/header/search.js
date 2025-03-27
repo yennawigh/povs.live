@@ -7,6 +7,11 @@ export const SearchBar = memo(({ query, onSearch, lang }) => {
 
   return (
     <div className="w-[250px] h-full border border-black/20 dark:border-white/15 rounded flex items-center cursor-pointer transition-all duration-300 ease-in-out">
+      <Icon
+        className="h-full w-[50px] center flex-shrink-0 border-r border-black/20 dark:border-white/15"
+        icon="si:search-line"
+        size={25}
+      />
       <input
         className="bg-transparent text-sm focus:outline-none w-full px-3 placeholder:/50 transition-colors"
         placeholder={placeholder}
@@ -15,11 +20,6 @@ export const SearchBar = memo(({ query, onSearch, lang }) => {
         value={query}
         type="text"
         autoFocus
-      />
-      <Icon
-        className="h-full w-[50px] center flex-shrink-0 border-l border-black/20 dark:border-white/15"
-        icon="lets-icons:search-duotone-line"
-        size={25}
       />
     </div>
   );

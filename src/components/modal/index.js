@@ -74,10 +74,12 @@ const ModalHeader = memo(({ title, onClose }) => (
 
 const getModalStyles = (position) => {
   const baseStyles =
-    "relative border border-black/20 dark:border-white/15 bg-white dark:bg-black w-auto max-w-6xl";
+    "relative border border-black/20 dark:border-white/15 bg-white/80 dark:bg-black/80 backdrop-blur-md w-auto";
 
   return position === "left" || position === "right"
     ? `${baseStyles} h-screen`
+    : position === "screen"
+    ? `${baseStyles} w-screen h-screen border-none`
     : position === "bottom"
     ? `${baseStyles} bottom-8 rounded-md`
     : `${baseStyles} rounded-md`;
@@ -104,7 +106,9 @@ const Modal = memo(({ name, title, position = "center", props, isOpen }) => {
 
   const animation = MODAL_ANIMATIONS[position] || MODAL_ANIMATIONS.default;
   const contentClassName =
-    position === "left" || position === "right" ? "h-auto overflow-y-auto pb-10" : "";
+    position === "left" || position === "right"
+      ? "h-auto overflow-y-auto pb-10"
+      : "";
 
   return (
     <AnimatePresence>
@@ -132,8 +136,5 @@ const Modal = memo(({ name, title, position = "center", props, isOpen }) => {
     </AnimatePresence>
   );
 });
-
-ModalHeader.displayName = "ModalHeader";
-Modal.displayName = "Modal";
 
 export default Modal;
