@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  outline: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
