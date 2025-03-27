@@ -119,24 +119,10 @@ export default function Streamer({ lang, index, total, streamer }) {
 
   return (
     <motion.div
-      className={`w-full flex items-center h-24 relative ${getBorderClasses()} ${
+      className={`w-full flex items-center h-24 ${getBorderClasses()} ${
         COMMON_STYLES.borderStyle
       } select-none`}
-      onMouseLeave={() => setHover(false)}
-      onMouseEnter={() => setHover(true)}
     >
-      {hover && streamer.live && (
-        <div className="absolute top-full left-0 right-0 bg-white dark:bg-black z-10 h-72">
-          <iframe
-            src={`https://player.kick.com/${streamer.name}?autoplay=true`}
-            allowFullScreen={true}
-            scrolling={"no"}
-            height={"100%"}
-            frameBorder="0"
-            width={"100%"}
-          ></iframe>
-        </div>
-      )}
       <div className="w-24 h-full flex-shrink-0 border-r border-black/20 dark:border-white/15 p-1.5">
         <img
           className="w-full h-full object-cover rounded-[2px] brightness-75"
