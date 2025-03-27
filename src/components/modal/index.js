@@ -74,12 +74,12 @@ const ModalHeader = memo(({ title, onClose }) => (
 
 const getModalStyles = (position) => {
   const baseStyles =
-    "relative border border-black/20 dark:border-white/15 bg-white/80 dark:bg-black/80 backdrop-blur-md w-auto";
+    "relative border border-black/20 dark:border-white/15 bg-white/80 dark:bg-black/80 backdrop-blur-md w-auto flex flex-col max-h-[90vh]";
 
   return position === "left" || position === "right"
-    ? `${baseStyles} h-screen`
+    ? `${baseStyles} h-screen max-h-screen`
     : position === "screen"
-    ? `${baseStyles} w-screen h-screen border-none`
+    ? `${baseStyles} w-screen h-screen max-h-screen border-none`
     : position === "bottom"
     ? `${baseStyles} bottom-8 rounded-md`
     : `${baseStyles} rounded-md`;
@@ -107,7 +107,9 @@ const Modal = memo(({ name, title, position = "center", props, isOpen }) => {
   const animation = MODAL_ANIMATIONS[position] || MODAL_ANIMATIONS.default;
   const contentClassName =
     position === "left" || position === "right"
-      ? "h-auto overflow-y-auto pb-10"
+      ? "flex-1 overflow-y-auto"
+      : position === "screen"
+      ? "flex-1 overflow-y-auto"
       : "";
 
   return (
@@ -121,8 +123,8 @@ const Modal = memo(({ name, title, position = "center", props, isOpen }) => {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className={getModalStyles(position)}
             transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            className={getModalStyles(position)}
             onClick={(e) => e.stopPropagation()}
             {...animation}
           >

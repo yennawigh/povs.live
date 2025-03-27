@@ -68,7 +68,7 @@ export default function ServerCard({ lang, server }) {
             </div>
             <p className="text-xs line-clamp-1">
               {status?.clients}{" "}
-              {CONVERT_LANG(lang, " oyuncu aktif", " players online")}
+              {CONVERT_LANG(lang, " oyuncu aktif", " player online")}
             </p>
           </div>
           <div className="flex items-center space-x-3 flex-auto w-1/4 h-full">

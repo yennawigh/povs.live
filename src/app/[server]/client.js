@@ -10,6 +10,7 @@ import { useState, useEffect, use } from "react";
 import { streamerService } from "@/services/streamerService";
 import { apiService } from "@/services/apiService";
 import ServerCard from "@/components/streamer/server";
+import Announcement from "@/components/header/announcement";
 
 function Content({ serverInfo: initialServerInfo }) {
   const [serverInfo, setServerInfo] = useState(initialServerInfo);
@@ -97,6 +98,7 @@ function Content({ serverInfo: initialServerInfo }) {
   return (
     <div className="min-h-screen">
       <Header server={serverInfo} onSearch={setSearchQuery} />
+      <Announcement server={serverInfo} />
       <motion.div className="w-full h-full grid grid-cols-3">
         <ServerCard lang={lang} server={serverInfo} />
         {filteredStreamers.map((streamer, index) => (

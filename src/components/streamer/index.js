@@ -125,8 +125,18 @@ export default function Streamer({ lang, index, total, streamer }) {
       onMouseLeave={() => setHover(false)}
       onMouseEnter={() => setHover(true)}
     >
-
-      {hover && <div className="absolute -inset-1 bg-black/5 dark:bg-white/10 h-52"></div>}
+      {hover && streamer.live && (
+        <div className="absolute top-full left-0 right-0 bg-white dark:bg-black z-10 h-72">
+          <iframe
+            src={`https://player.kick.com/${streamer.name}?autoplay=true`}
+            allowFullScreen={true}
+            scrolling={"no"}
+            height={"100%"}
+            frameBorder="0"
+            width={"100%"}
+          ></iframe>
+        </div>
+      )}
       <div className="w-24 h-full flex-shrink-0 border-r border-black/20 dark:border-white/15 p-1.5">
         <img
           className="w-full h-full object-cover rounded-[2px] brightness-75"
