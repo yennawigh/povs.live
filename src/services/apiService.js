@@ -47,9 +47,9 @@ export const apiService = {
     }
   },
 
-  async updateServerInfo(serverCode, data) {
+  async updateServerInfo(serverName, data) {
     try {
-      const serverRef = ref(db, `${serverCode}`);
+      const serverRef = ref(db, `${serverName}`);
       await set(serverRef, data);
       return true;
     } catch (error) {
@@ -82,29 +82,33 @@ export const apiService = {
 
   watchServerChanges(serverName, onChange) {
     const serverRef = ref(db, `${serverName}`);
-    
-    const unsubscribe = onValue(serverRef, (snapshot) => {
-      const data = snapshot.val();
-      if (!data) return;
-      
-      onChange({
-        STREAMERS: data.STREAMERS || { twitch: [], kick: [] },
-        BACKGROUND: data.BACKGROUND,
-        NAME: data.NAME,
-        LOGO: data.LOGO,
-        CODE: data.CODE,
-        COLOR: data.COLOR,
-        ANNOUNCEMENT: data.ANNOUNCEMENT,
-        GAME_WORDS: data.GAME_WORDS || [],
-        CHARACTERS: data.CHARACTERS || [],
-      });
-    }, (error) => {
-      console.error("Error watching server changes:", error);
-    });
+
+    const unsubscribe = onValue(
+      serverRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        onChange({
+          STREAMERS: data.STREAMERS || { twitch: [], kick: [] },
+          BACKGROUND: data.BACKGROUND,
+          NAME: data.NAME,
+          LOGO: data.LOGO,
+          CODE: data.CODE,
+          COLOR: data.COLOR,
+          ANNOUNCEMENT: data.ANNOUNCEMENT,
+          GAME_WORDS: data.GAME_WORDS || [],
+          CHARACTERS: data.CHARACTERS || [],
+        });
+      },
+      (error) => {
+        console.error("Error watching server changes:", error);
+      }
+    );
 
     return () => {
       off(serverRef);
       unsubscribe();
     };
-  }
+  },
 };

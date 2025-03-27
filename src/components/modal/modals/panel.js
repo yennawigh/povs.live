@@ -55,7 +55,7 @@ export default function Panel(serverInfo) {
   };
 
   const handleSave = async () => {
-    await apiService.updateServerInfo(serverInfo.CODE, formData);
+    await apiService.updateServeInfo("venny", formData);
     window.location.reload();
   };
 

@@ -16,17 +16,11 @@ const ActionButton = ({ onClick, icon, tooltip, isActive }) => (
 export function ActionButtons({ openModal, server, lang }) {
   const MODAL_CONFIGS = [
     {
-      id: "SETTINGS",
       titleKey: ["Ayarlar", "Settings"],
       icon: "solar:settings-bold",
+      id: "SETTINGS",
     },
-    {
-      id: "PANEL",
-      data: server,
-      titleKey: ["Panel", "Ayarlar"],
-      icon: "solar:shield-bold",
-      position: "screen",
-    },
+   
   ];
 
   return (

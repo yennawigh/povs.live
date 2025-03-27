@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Icon from "../icon";
 import { CONVERT_LANG } from "@/lib/utils";
+import { motion } from "framer-motion";
+import Icon from "../icon";
 
 export default function ServerCard({ lang, server }) {
   const [status, setStatus] = useState(null);

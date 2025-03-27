@@ -20,7 +20,7 @@ export default function Header({ server, onSearch }) {
             onSearch(e.target.value.toLowerCase());
           }}
         />
-        <ActionButtons server={server} openModal={openModal} />
+        <ActionButtons lang={lang} server={server} openModal={openModal} />
       </div>
     </div>
   );

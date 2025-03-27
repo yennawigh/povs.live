@@ -2,10 +2,10 @@
 
 import { CALCULATE_UPTIME2, CONVERT_LANG } from "@/lib/utils";
 import { useStreamer } from "@/contexts/StreamerContext";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Icon from "../icon";
 import classNames from "classnames";
+import { useState } from "react";
+import Icon from "../icon";
 
 const COMMON_STYLES = {
   borderStyle: "border-black/20 dark:border-white/15",

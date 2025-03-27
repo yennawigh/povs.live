@@ -1,5 +1,5 @@
-import { ModalProvider } from "@/contexts/modal-context";
 import { SettingsProvider } from "@/contexts/settings-context";
+import { ModalProvider } from "@/contexts/modal-context";
 import { montserrat } from "@/fonts";
 import './globals.css';
 
