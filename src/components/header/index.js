@@ -14,13 +14,10 @@ export default function Header({ server, onSearch }) {
 
   useEffect(() => {
     if (server?.CODE) {
-      fetch(
-        `https://servers-frontend.fivem.net/api/servers/single/${server?.CODE}`,
-        {
-          headers: { "Content-Type": "application/json" },
-          mode: "cors",
-        }
-      )
+      fetch(`https://servers-frontend.fivem.net/api/servers/single/${server.CODE}`, {
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+      })
         .then((response) => {
           if (!response.ok) throw new Error("Network response was not ok");
           return response.json();
@@ -37,22 +34,25 @@ export default function Header({ server, onSearch }) {
       setPlayers({ error: "Oyuncu sayısı alınamadı" });
     }
   }, [server]);
+  console.log(players);
 
   return (
-    <div className="w-full h-[65px] flex items-center justify-between border-b border-black/20 dark:border-white/15 p-2">
+    <div className="w-full h-[65px] flex items-center justify-between border-b border-black/20 dark:border-white/15">
       <div className="flex items-center space-x-2 h-full w-auto">
         <img
-          className="h-full w-auto flex-shrink-0 rounded"
+          className="h-full w-auto flex-shrink-0"
           src={server.LOGO}
         />
-        <div className="flex flex-col -space-y-1">
-          <h3 className="text-lg font-bold">{server.NAME.toUpperCase()}</h3>
+        <div className="flex flex-col -space-y-0.5">
+          <h3 className="text-xl font-bold">{server.NAME.toUpperCase()}</h3>
           <p className="text-xs opacity-70 dark:opacity-70">
-            {server.ANNOUNCEMENT}
+            {players?.error
+              ? "Sunucu kapalı"
+              : players?.clients + " oyuncu aktif"}
           </p>
         </div>
       </div>
-      <div className="flex items-center space-x-2 h-full">
+      <div className="flex items-center space-x-2 h-full p-2">
         <SearchBar
           lang={lang}
           query={query}
