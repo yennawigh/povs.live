@@ -17,14 +17,17 @@ const COMMON_STYLES = {
 
 const FavoriteButton = ({ isActive, onClick }) => (
   <div className="h-full center w-10 p-2.5 cursor-pointer" onClick={onClick}>
-    <Icon icon={`solar:bookmark-${isActive ? "bold" : "outline"}`} />
+    <Icon
+      icon={`solar:bookmark-${isActive ? "bold" : "outline"}`}
+      className="opacity-75 dark:opacity-75"
+    />
   </div>
 );
 
 const StreamerStat = ({ icon, text }) => (
   <div className={COMMON_STYLES.statContainer}>
     <div className={COMMON_STYLES.iconContainer}>
-      <Icon icon={icon} />
+      <Icon className="opacity-75 dark:opacity-75" icon={icon} />
     </div>
     <p className="text-xs line-clamp-1">{text}</p>
   </div>
@@ -57,7 +60,6 @@ const OfflineContent = ({ streamer }) => (
 export default function Streamer({ lang, index, total, streamer }) {
   const { setFavorites, favorites } = useStreamer();
   const [currentPlatform] = useState("kick");
-  const [hover, setHover] = useState(false);
 
   const getBorderClasses = () => {
     const adjustedIndex = index + 1;

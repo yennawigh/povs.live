@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useSettings } from "@/contexts/settings-context";
 import { Icon as IconifyIcon } from "@iconify-icon/react";
 import { useEffect, useState } from "react";
