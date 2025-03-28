@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect, use } from "react";
 import { streamerService } from "@/services/streamerService";
 import { apiService } from "@/services/apiService";
-import ServerCard from "@/components/streamer/server";
+import ServerCard from "@/components/streamer/status";
 import Announcement from "@/components/header/announcement";
 
 function Content({ serverInfo: initialServerInfo }) {

@@ -127,7 +127,7 @@ export default function Streamer({ lang, index, total, streamer }) {
     >
       <div className="w-24 h-full flex-shrink-0 border-r border-black/20 dark:border-white/15 p-1.5">
         <img
-          className="w-full h-full object-cover rounded-[2px] brightness-75"
+          className="w-full h-full object-cover rounded brightness-75"
           src={streamer.avatar}
           alt={streamer.name}
         />

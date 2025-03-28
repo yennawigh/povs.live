@@ -32,19 +32,27 @@ export default function Panel(serverInfo) {
     const username = prompt(`Enter ${platform} username:`);
     if (!username) return;
 
+    const cleanUsername = username.trim().toLowerCase();
+    if (cleanUsername.length < 1) return;
+
+    // Check if username already exists
+    if (formData.STREAMERS?.[platform]?.includes(cleanUsername)) {
+      alert("Bu yayıncı zaten ekli!");
+      return;
+    }
+
     setFormData((prev) => ({
       ...prev,
       STREAMERS: {
         ...prev.STREAMERS,
-        [platform]: [
-          ...(prev.STREAMERS[platform] || []),
-          username.toLowerCase(),
-        ],
+        [platform]: [...(prev.STREAMERS?.[platform] || []), cleanUsername],
       },
     }));
   };
 
   const handleStreamerRemove = (platform, username) => {
+    if (!formData.STREAMERS?.[platform]) return;
+
     setFormData((prev) => ({
       ...prev,
       STREAMERS: {
@@ -55,7 +63,7 @@ export default function Panel(serverInfo) {
   };
 
   const handleSave = async () => {
-    await apiService.updateServeInfo("venny", formData);
+    await apiService.updateServerInfo("venny", formData);
     window.location.reload();
   };
 
@@ -77,7 +85,6 @@ export default function Panel(serverInfo) {
   return (
     <div className="w-full h-full">
       <div className="w-full h-full flex">
-        {/* Sol Panel - Form Alanı */}
         <div className="w-full h-full p-4 space-y-4">
           <div className="space-y-3">
             <h3 className="text-lg font-bold">Temel Bilgiler</h3>
