@@ -10,7 +10,7 @@ export default function Header({ server, onSearch }) {
   const { lang } = useSettings();
 
   return (
-    <div className="w-full h-[65px] flex items-center justify-between border-b border-black/20 dark:border-white/15">
+    <div className="w-full h-[65px] flex items-center justify-between border-b border-black/20 dark:border-white/15 border-dashed">
       <div className="flex items-center space-x-2 h-full p-2">
         <SearchBar
           lang={lang}
@@ -20,6 +20,8 @@ export default function Header({ server, onSearch }) {
             onSearch(e.target.value.toLowerCase());
           }}
         />
+      </div>
+      <div className="flex items-center space-x-2 h-full p-2">
         <ActionButtons lang={lang} server={server} openModal={openModal} />
       </div>
     </div>

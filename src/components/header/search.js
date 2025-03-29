@@ -6,9 +6,9 @@ export const SearchBar = memo(({ query, onSearch, lang }) => {
   const placeholder = CONVERT_LANG(lang, "Ara", "Search");
 
   return (
-    <div className="w-[250px] h-full border border-black/20 dark:border-white/15 rounded flex items-center cursor-pointer transition-all duration-300 ease-in-out">
+    <div className="w-[250px] h-full border border-black/20 dark:border-white/15 border-dashed rounded flex items-center cursor-pointer transition-all duration-300 ease-in-out">
       <Icon
-        className="h-full w-[50px] center flex-shrink-0 border-r border-black/20 dark:border-white/15"
+        className="h-full w-[50px] center flex-shrink-0 border-r border-black/20 dark:border-white/15 border-dashed"
         icon="si:search-line"
         size={25}
       />

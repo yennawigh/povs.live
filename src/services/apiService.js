@@ -1,13 +1,11 @@
-import { ref, get, set, onValue, off } from "firebase/database";
+import { ref, get, set, onValue, off, push } from "firebase/database";
 import { db } from "@/lib/firebase";
-import { FILTER_NULLS } from "@/lib/utils";
 
 let activeSubscriptions = {};
 
 export const apiService = {
   async getServerInfo(serverName) {
     try {
-      // Önceki subscription varsa temizle
       if (activeSubscriptions[serverName]) {
         off(activeSubscriptions[serverName]);
         delete activeSubscriptions[serverName];
@@ -19,7 +17,6 @@ export const apiService = {
 
       if (!data) return null;
 
-      // Single subscription ekle
       activeSubscriptions[serverName] = serverRef;
 
       return {
@@ -39,7 +36,6 @@ export const apiService = {
     }
   },
 
-  // Cleanup metodu ekle
   cleanup(serverName) {
     if (activeSubscriptions[serverName]) {
       off(activeSubscriptions[serverName]);
@@ -110,5 +106,25 @@ export const apiService = {
       off(serverRef);
       unsubscribe();
     };
+  },
+
+  async sendMessage(serverName, message) {
+    try {
+      const contactsRef = ref(db, `${serverName}/CONTACTS`);
+      const snapshot = await get(contactsRef);
+      const contacts = snapshot.val() || {};
+
+      // Get next index
+      const nextIndex = Object.keys(contacts).length;
+
+      await set(ref(db, `${serverName}/CONTACTS/${nextIndex}`), {
+        message,
+        timestamp: Date.now(),
+      });
+      return true;
+    } catch (error) {
+      console.error("Error sending message:", error);
+      return false;
+    }
   },
 };

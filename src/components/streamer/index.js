@@ -8,11 +8,11 @@ import { useState } from "react";
 import Icon from "../icon";
 
 const COMMON_STYLES = {
-  borderStyle: "border-black/20 dark:border-white/15",
+  borderStyle: "border-black/20 dark:border-white/15 border-dashed",
   iconContainer:
-    "h-full border-r border-black/20 dark:border-white/15 center w-10 flex-shrink-0",
+    "h-full border-r border-black/20 dark:border-white/15 border-dashed center w-10 flex-shrink-0",
   statContainer:
-    "flex items-center space-x-3 flex-auto w-1/4 h-full border-r border-black/20 dark:border-white/15",
+    "flex items-center space-x-3 flex-auto w-1/4 h-full border-r border-black/20 dark:border-white/15 border-dashed",
 };
 
 const FavoriteButton = ({ isActive, onClick }) => (
@@ -125,9 +125,9 @@ export default function Streamer({ lang, index, total, streamer }) {
         COMMON_STYLES.borderStyle
       } select-none`}
     >
-      <div className="w-24 h-full flex-shrink-0 border-r border-black/20 dark:border-white/15 p-1.5">
+      <div className="w-24 h-full flex-shrink-0 border-r border-black/20 dark:border-white/15 border-dashed p-1.5">
         <img
-          className="w-full h-full object-cover rounded brightness-75"
+          className="w-full h-full object-cover rounded-[2px] brightness-75"
           src={streamer.avatar}
           alt={streamer.name}
         />

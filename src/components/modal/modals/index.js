@@ -9,4 +9,8 @@ export const modals = [
     name: "PANEL",
     component: dynamic(() => import("./panel")),
   },
+  {
+    name: "CONTACT",
+    component: dynamic(() => import("./contact")),
+  },
 ];

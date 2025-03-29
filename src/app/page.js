@@ -24,7 +24,7 @@ export default function Home() {
               backgroundImage: `url(${server.LOGO})`,
             }}
             className="h-72 w-72 bg-center bg-no-repeat bg-cover rounded-md relative overflow-hidden group"
-            href={`/${server.NAME.toLowerCase()}`}
+            href={`/${server.NAME}`}
             key={server.NAME}
           >
             <Icon
@@ -34,7 +34,7 @@ export default function Home() {
               size={100}
             />
             <div className="absolute bottom-1 left-1 right-1 bg-white/30 dark:bg-black/30 backdrop-blur-lg flex items-center justify-between rounded p-2">
-              <h3 className=" font-bold">{server.NAME}</h3>
+              <h3 className="font-bold">{server.NAME.toUpperCase()}</h3>
               <p className="text-xs">{server.STREAMERS.kick.length} yayıncı</p>
             </div>
           </Link>

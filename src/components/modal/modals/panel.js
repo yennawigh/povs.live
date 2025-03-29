@@ -16,11 +16,11 @@ export default function Panel(serverInfo) {
   });
 
   const COMMON_STYLES = {
-    borderStyle: "border-black/20 dark:border-white/15",
+    borderStyle: "border-black/20 dark:border-white/15 border-dashed",
     iconContainer:
-      "h-full border-r border-black/20 dark:border-white/15 center w-10 flex-shrink-0",
+      "h-full border-r border-black/20 dark:border-white/15 border-dashed center w-10 flex-shrink-0",
     statContainer:
-      "flex items-center space-x-3 flex-auto w-full h-[38px] border-b border-black/20 dark:border-white/15 last:border-none",
+      "flex items-center space-x-3 flex-auto w-full h-[38px] border-b border-black/20 dark:border-white/15 border-dashed last:border-none",
   };
 
   const handleInputChange = (e) => {
@@ -94,7 +94,7 @@ export default function Panel(serverInfo) {
               value={formData.NAME}
               onChange={handleInputChange}
               placeholder="Sunucu Adı"
-              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15"
+              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15 border-dashed"
             />
             <input
               type="text"
@@ -102,7 +102,7 @@ export default function Panel(serverInfo) {
               value={formData.LOGO}
               onChange={handleInputChange}
               placeholder="Logo URL"
-              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15"
+              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15 border-dashed"
             />
             <input
               type="text"
@@ -110,7 +110,7 @@ export default function Panel(serverInfo) {
               value={formData.BACKGROUND}
               onChange={handleInputChange}
               placeholder="Arkaplan URL"
-              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15"
+              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15 border-dashed"
             />
             <input
               type="text"
@@ -118,14 +118,14 @@ export default function Panel(serverInfo) {
               value={formData.COLOR}
               onChange={handleInputChange}
               placeholder="Tema Rengi (Hex)"
-              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15"
+              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15 border-dashed"
             />
             <textarea
               name="ANNOUNCEMENT"
               value={formData.ANNOUNCEMENT}
               onChange={handleInputChange}
               placeholder="Duyuru Metni"
-              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15 h-24 resize-none"
+              className="w-full p-2 rounded bg-transparent dark:bg-transparent border border-black/20 dark:border-white/15 border-dashed h-24 resize-none"
             />
           </div>
 
@@ -137,13 +137,13 @@ export default function Panel(serverInfo) {
           </button>
         </div>
 
-        <div className="w-96 h-full overflow-hidden overflow-y-auto border-l border-black/20 dark:border-white/15">
-          <div className="border-b border-black/20 dark:border-white/15 p-2">
+        <div className="w-96 h-full overflow-hidden overflow-y-auto border-l border-black/20 dark:border-white/15 border-dashed">
+          <div className="border-b border-black/20 dark:border-white/15 border-dashed p-2">
             <h3 className="text-lg font-bold uppercase text-center">
               Yayıncılar
             </h3>
           </div>
-          <div className="flex space-x-2 p-2 border-b border-black/20 dark:border-white/15">
+          <div className="flex space-x-2 p-2 border-b border-black/20 dark:border-white/15 border-dashed">
             <button
               onClick={() => handleStreamerAdd("kick")}
               className="flex-1 bg-green-500 text-white py-1.5 rounded text-sm hover:bg-green-600 transition-colors"

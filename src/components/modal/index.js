@@ -3,6 +3,7 @@ import { useModal } from "@/contexts/modal-context";
 import { useEffect, memo } from "react";
 import { modals } from "./modals";
 import Icon from "../icon";
+import { useSettings } from "@/contexts/settings-context";
 
 const POSITIONS = {
   center: "items-center justify-center",
@@ -59,22 +60,9 @@ const MODAL_ANIMATIONS = {
   },
 };
 
-const ModalHeader = memo(({ title, onClose }) => (
-  <div className="flex justify-between items-center h-16 p-2 border-b border-black/20 dark:border-white/15">
-    <h3 className="text-xl font-bold ml-2">{title}</h3>
-    <button
-      className="bg-red-500/20 hover:bg-red-500 transition-colors cursor-pointer flex items-center justify-center rounded h-full w-[50px]"
-      onClick={onClose}
-      aria-label="Close modal"
-    >
-      <Icon icon="clarity:close-line" size={25} />
-    </button>
-  </div>
-));
-
 const getModalStyles = (position) => {
   const baseStyles =
-    "relative border border-black/20 dark:border-white/15 bg-white/80 dark:bg-black/80 backdrop-blur-md w-auto flex flex-col max-h-[90vh]";
+    "relative border border-black/20 dark:border-white/15 border-dashed bg-white/80 dark:bg-black/80 backdrop-blur-md w-auto flex flex-col max-h-[90vh]";
 
   return position === "left" || position === "right"
     ? `${baseStyles} h-screen max-h-screen`
@@ -89,6 +77,7 @@ const Modal = memo(({ name, title, position = "center", props, isOpen }) => {
   const { closeModal } = useModal();
   const modalConfig = modals.find((m) => m.name === name);
   const Component = modalConfig?.component;
+  const { lang } = useSettings();
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -128,9 +117,13 @@ const Modal = memo(({ name, title, position = "center", props, isOpen }) => {
             onClick={(e) => e.stopPropagation()}
             {...animation}
           >
-            <ModalHeader title={title} onClose={() => closeModal(name)} />
             <div className={contentClassName}>
-              <Component {...props} closeModal={() => closeModal(name)} />
+              <Component
+                close={() => closeModal(name)}
+                title={title}
+                data={props}
+                lang={lang}
+              />
             </div>
           </motion.div>
         </motion.div>
